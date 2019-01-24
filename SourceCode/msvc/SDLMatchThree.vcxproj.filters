@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\MatchThree">
+      <UniqueIdentifier>{1da78fb3-855f-4e63-9ad4-e366952a1ee4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MatchThree">
+      <UniqueIdentifier>{01246366-6354-441d-8bea-d53183426b31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SDLWrapper">
+      <UniqueIdentifier>{71369e4a-8c3f-454a-bdba-5c82895475ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SDLWrapper">
+      <UniqueIdentifier>{6821ade4-45c6-4243-9e66-0f5cdb1a863b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\MatchThree\MatchThreeGame.cpp">
+      <Filter>Source Files\MatchThree</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MatchThree\Sprite.cpp">
+      <Filter>Source Files\MatchThree</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MatchThree\Grid.cpp">
+      <Filter>Source Files\MatchThree</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MatchThree\Animation.cpp">
+      <Filter>Source Files\MatchThree</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MatchThree\Score.cpp">
+      <Filter>Source Files\MatchThree</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MatchThree\GameStates.cpp">
+      <Filter>Source Files\MatchThree</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\include\SDLWrapper\Engine.cpp">
+      <Filter>Source Files\SDLWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\include\SDLWrapper\Font.cpp">
+      <Filter>Source Files\SDLWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\include\SDLWrapper\GlContext.cpp">
+      <Filter>Source Files\SDLWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\main.cpp">
+      <Filter>Source Files\SDLWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\include\SDLWrapper\Sdl.cpp">
+      <Filter>Source Files\SDLWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\include\SDLWrapper\SdlSurface.cpp">
+      <Filter>Source Files\SDLWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\include\SDLWrapper\SdlWindow.cpp">
+      <Filter>Source Files\SDLWrapper</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\MatchThree\MatchThreeGame.h">
+      <Filter>Header Files\MatchThree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MatchThree\Sprite.h">
+      <Filter>Header Files\MatchThree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MatchThree\Grid.h">
+      <Filter>Header Files\MatchThree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MatchThree\Drawable.h">
+      <Filter>Header Files\MatchThree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MatchThree\Animation.h">
+      <Filter>Header Files\MatchThree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MatchThree\GridElementAnimation.h">
+      <Filter>Header Files\MatchThree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MatchThree\Score.h">
+      <Filter>Header Files\MatchThree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MatchThree\Timer.h">
+      <Filter>Header Files\MatchThree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MatchThree\CallbackInterface.h">
+      <Filter>Header Files\MatchThree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MatchThree\GameStates.h">
+      <Filter>Header Files\MatchThree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\include\SDLWrapper\Engine.h">
+      <Filter>Header Files\SDLWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\include\SDLWrapper\Font.h">
+      <Filter>Header Files\SDLWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\include\SDLWrapper\GlContext.h">
+      <Filter>Header Files\SDLWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\include\SDLWrapper\Sdl.h">
+      <Filter>Header Files\SDLWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\include\SDLWrapper\SdlSurface.h">
+      <Filter>Header Files\SDLWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\include\SDLWrapper\SdlWindow.h">
+      <Filter>Header Files\SDLWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\include\SDLWrapper\Updater.h">
+      <Filter>Header Files\SDLWrapper</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
