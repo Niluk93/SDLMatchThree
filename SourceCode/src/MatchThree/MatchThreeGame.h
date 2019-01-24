@@ -6,7 +6,7 @@
 
 class GameStateBase;
 
-class MatchThreeGame : public SDLEngine::Updater
+class MatchThreeGame : public SDLWrapper::Updater
 {
 public:
 	MatchThreeGame();
@@ -15,7 +15,7 @@ public:
 	void Update();
 
 private:
-	SDLEngine::Engine mEngine;
+	SDLWrapper::Engine mEngine;
 
 	GameStateBase* mGameState;
 };

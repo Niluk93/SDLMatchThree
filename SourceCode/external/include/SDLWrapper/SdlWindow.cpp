@@ -4,7 +4,7 @@
 #include <string>
 #include <sdl/SDL.h>
 
-namespace SDLEngine {
+namespace SDLWrapper {
 	SdlWindow::SdlWindow(unsigned int width, unsigned int height)
 		: mSDLWindow(SDL_CreateWindow("Match Three Game"
 		, SDL_WINDOWPOS_UNDEFINED

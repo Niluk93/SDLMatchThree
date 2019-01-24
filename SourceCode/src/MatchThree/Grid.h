@@ -31,10 +31,10 @@ public:
 	~Grid();
 
 	void InitGrid(float x, float y, float spacing);
-	void PopulateSprites(const SDLEngine::Engine& Engine);
+	void PopulateSprites(const SDLWrapper::Engine& Engine);
 
-	void Update(const SDLEngine::Engine& Engine);
-	void Render(const SDLEngine::Engine& Engine) const;
+	void Update(const SDLWrapper::Engine& Engine);
+	void Render(const SDLWrapper::Engine& Engine) const;
 	
 	int GetCurrentScore() const;
 
@@ -62,7 +62,7 @@ private:
 	bool CheckForMatch(int row, int col);
 
 	//gets the first/last index of texture type provided in the row/column based on the row/column step
-	int GetExtremesForTextureType(const SDLEngine::Engine::Texture& texture, int rowStart, int columnStart, int rowStep, int columnStep);
+	int GetExtremesForTextureType(const SDLWrapper::Engine::Texture& texture, int rowStart, int columnStart, int rowStep, int columnStep);
 
 	//move the removed element to a temporary vector, and start moving elements above it to its position. 
 	//Optionally provide a callback for when the objects above it have reached the target

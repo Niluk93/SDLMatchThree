@@ -4,7 +4,7 @@
 
 #include <sdl/SDL.h>
 
-namespace SDLEngine {
+namespace SDLWrapper {
 	class SdlWindow;
 
 	class GlContext {

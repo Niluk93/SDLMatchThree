@@ -6,7 +6,7 @@
 #include <sdl/SDL.h>
 #include <sdl/SDL_image.h>
 
-namespace SDLEngine {
+namespace SDLWrapper {
 	SdlSurface::SdlSurface(const char* filename)
 		: mSurface(IMG_Load(filename), SDL_FreeSurface)
 		, mTextureId(new unsigned int, &DeleteTexture) {

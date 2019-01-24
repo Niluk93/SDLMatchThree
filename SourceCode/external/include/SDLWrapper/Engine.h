@@ -3,7 +3,7 @@
 #include <glm/fwd.hpp>
 #include <memory>
 
-namespace SDLEngine {
+namespace SDLWrapper {
 	class Updater;
 	class Engine {
 	public:

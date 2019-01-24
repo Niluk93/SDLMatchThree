@@ -41,8 +41,8 @@ Grid::Grid(int _SizeX, int _SizeY)
 		}
 	}
 
-	mScore->SetPosition(SDLEngine::Engine::GetWidth() / 2.f - SDLEngine::Engine::CalculateStringWidth("0000") / 2.f,
-						SDLEngine::Engine::GetHeight() - 70.f);
+	mScore->SetPosition(SDLWrapper::Engine::GetWidth() / 2.f - SDLWrapper::Engine::CalculateStringWidth("0000") / 2.f,
+						SDLWrapper::Engine::GetHeight() - 70.f);
 }
 
 Grid::~Grid()
@@ -91,7 +91,7 @@ void Grid::SetSafeTextureForSprite(int row, int col)
 	if (!currSprite)
 		return;
 
-	SDLEngine::Engine::Texture randomTexture = (SDLEngine::Engine::Texture)(SDLEngine::Engine::TEXTURE_GEMS_START + (std::rand() % SDLEngine::Engine::TEXTURE_GEMS_END));
+	SDLWrapper::Engine::Texture randomTexture = (SDLWrapper::Engine::Texture)(SDLWrapper::Engine::TEXTURE_GEMS_START + (std::rand() % SDLWrapper::Engine::TEXTURE_GEMS_END));
 	currSprite->SetTexture(randomTexture);
 
 	//find the first and last row for consecutive textures of current type adjacent to provided row and columns
@@ -108,13 +108,13 @@ void Grid::SetSafeTextureForSprite(int row, int col)
 	{
 		do
 		{
-			randomTexture = (SDLEngine::Engine::Texture)(SDLEngine::Engine::TEXTURE_GEMS_START + (std::rand() % SDLEngine::Engine::TEXTURE_GEMS_END));
+			randomTexture = (SDLWrapper::Engine::Texture)(SDLWrapper::Engine::TEXTURE_GEMS_START + (std::rand() % SDLWrapper::Engine::TEXTURE_GEMS_END));
 		} while (randomTexture == currSprite->GetTexture());
 	}
 	currSprite->SetTexture(randomTexture);
 }
 
-void Grid::PopulateSprites(const SDLEngine::Engine& engine)
+void Grid::PopulateSprites(const SDLWrapper::Engine& engine)
 {
 	if (!mGridElements)
 		return;
@@ -122,10 +122,10 @@ void Grid::PopulateSprites(const SDLEngine::Engine& engine)
 	//All gem textures have slightly different width/height. 
 	//Getting the average width/height helps avoid issues where x and y spacings don't appropriately sync up
 	int numTextures = 0;
-	for (int i = SDLEngine::Engine::TEXTURE_GEMS_START; i <= SDLEngine::Engine::TEXTURE_GEMS_END; ++i)
+	for (int i = SDLWrapper::Engine::TEXTURE_GEMS_START; i <= SDLWrapper::Engine::TEXTURE_GEMS_END; ++i)
 	{
-		averageTexWidth += engine.GetTextureWidth((SDLEngine::Engine::Texture)i);
-		averageTexHeight += engine.GetTextureHeight((SDLEngine::Engine::Texture)i);
+		averageTexWidth += engine.GetTextureWidth((SDLWrapper::Engine::Texture)i);
+		averageTexHeight += engine.GetTextureHeight((SDLWrapper::Engine::Texture)i);
 		++numTextures;
 	}
 
@@ -238,7 +238,7 @@ bool Grid::CheckForMatch(int row, int col)
 	if (!currSprite)
 		return false;
 
-	SDLEngine::Engine::Texture targetTexture = currSprite->GetTexture();
+	SDLWrapper::Engine::Texture targetTexture = currSprite->GetTexture();
 
 	//find the first and last row for consecutive textures of current type adjacent to provided row and columns
 	int startingRow = GetExtremesForTextureType(targetTexture, row, col, step_negative, 0);
@@ -315,7 +315,7 @@ void Grid::ClearRemovedElements(int col, int startingRow, int endingRow, GridAni
 		mScore->IncrementScore(numDestroyed);
 }
 
-int Grid::GetExtremesForTextureType(const SDLEngine::Engine::Texture& texture, int rowStart, int columnStart, int rowStep, int columnStep)
+int Grid::GetExtremesForTextureType(const SDLWrapper::Engine::Texture& texture, int rowStart, int columnStart, int rowStep, int columnStep)
 {
 	//invalid step count. early out instead.
 	if (rowStep == 0 && columnStep == 0)
@@ -404,7 +404,7 @@ int Grid::GetCurrentScore() const
 	return mScore->GetScore(); 
 }
 
-void Grid::Update(const SDLEngine::Engine& engine)
+void Grid::Update(const SDLWrapper::Engine& engine)
 {
 	//Remove any animations from the list that are marked for delete
 	for (size_t i = 0; i < mAnimations.size(); ++i)
@@ -490,7 +490,7 @@ void Grid::Update(const SDLEngine::Engine& engine)
 	mouseDownLastFrame = isMouseDown;
 }
 
-void Grid::Render(const SDLEngine::Engine& engine) const
+void Grid::Render(const SDLWrapper::Engine& engine) const
 {
 	if (!mGridElements)
 		return;

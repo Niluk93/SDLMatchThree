@@ -18,7 +18,7 @@
 #include "Updater.h"
 
 
-namespace SDLEngine {
+namespace SDLWrapper {
 	static const int WindowWidth = 640;
 	static const int WindowHeight = 960;
 	static const float MaxFrameTicks = 300.0f;

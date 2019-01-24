@@ -9,8 +9,8 @@ public:
 	Drawable(float _x, float _y, float _rot, float _scale) : xPos(_x), yPos(_y), rotation(_rot), scale(_scale) {}
 	virtual ~Drawable() {}
 
-	virtual void Update(const SDLEngine::Engine& engine) = 0;
-	virtual void Render(const SDLEngine::Engine& engine) const = 0;
+	virtual void Update(const SDLWrapper::Engine& engine) = 0;
+	virtual void Render(const SDLWrapper::Engine& engine) const = 0;
 
 	inline void SetPosition(float x, float y) { xPos = x; yPos = y; }
 	inline void GetPosition(float& x, float& y) const { x = xPos; y = yPos; }

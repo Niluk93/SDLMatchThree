@@ -4,7 +4,7 @@
 
 struct SDL_Window;
 
-namespace SDLEngine {
+namespace SDLWrapper {
 	class SdlWindow {
 	public:
 		SdlWindow(unsigned int width, unsigned int height);

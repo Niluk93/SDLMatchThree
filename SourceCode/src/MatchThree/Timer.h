@@ -11,8 +11,8 @@ public:
 	Timer(float _maxTime, T* _owner = nullptr, Callback _onTimerFinished = nullptr);
 	~Timer() = default;
 
-	void Update(const SDLEngine::Engine& engine);
-	void Render(const SDLEngine::Engine& engine) const;
+	void Update(const SDLWrapper::Engine& engine);
+	void Render(const SDLWrapper::Engine& engine) const;
 
 private:
 	float maxTimeInSeconds;
@@ -35,7 +35,7 @@ Timer<T>::Timer(float _maxTime, T* _owner, Callback _onTimerFinished)
 }
 
 template<typename T>
-void Timer<T>::Update(const SDLEngine::Engine& engine)
+void Timer<T>::Update(const SDLWrapper::Engine& engine)
 {
 	currentTimeInSeconds += engine.GetLastFrameSeconds();
 	if (currentTimeInSeconds >= maxTimeInSeconds)
@@ -50,7 +50,7 @@ void Timer<T>::Update(const SDLEngine::Engine& engine)
 }
 
 template<typename T>
-void Timer<T>::Render(const SDLEngine::Engine& engine) const
+void Timer<T>::Render(const SDLWrapper::Engine& engine) const
 {
 	int remainingTime = (int)(maxTimeInSeconds - currentTimeInSeconds);
 	int remainingMinutes = remainingTime / 60;

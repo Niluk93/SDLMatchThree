@@ -1,7 +1,7 @@
 #include "Sprite.h"
 
 Sprite::Sprite()
-	: mTexture(SDLEngine::Engine::TEXTURE_MAX)
+	: mTexture(SDLWrapper::Engine::TEXTURE_MAX)
 	, Drawable()
 {
 
@@ -29,12 +29,12 @@ const Sprite::Texture& Sprite::GetTexture() const
 	return mTexture;
 }
 
-void Sprite::Update(const SDLEngine::Engine& engine)
+void Sprite::Update(const SDLWrapper::Engine& engine)
 {
 
 }
 
-void Sprite::Render(const SDLEngine::Engine& engine) const
+void Sprite::Render(const SDLWrapper::Engine& engine) const
 {
 	engine.Render(mTexture, xPos, yPos, rotation);
 }

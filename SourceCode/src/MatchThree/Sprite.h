@@ -3,7 +3,7 @@
 
 class Sprite : public Drawable
 {
-	typedef SDLEngine::Engine::Texture Texture;
+	typedef SDLWrapper::Engine::Texture Texture;
 
 public:
 	Sprite();
@@ -13,8 +13,8 @@ public:
 	void SetTexture(const Texture& texture);
 	const Texture& GetTexture() const;
 
-	void Update(const SDLEngine::Engine& engine);
-	void Render(const SDLEngine::Engine& engine) const;
+	void Update(const SDLWrapper::Engine& engine);
+	void Render(const SDLWrapper::Engine& engine) const;
 
 private:
 	Texture mTexture;

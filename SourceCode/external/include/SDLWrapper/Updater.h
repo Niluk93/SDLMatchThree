@@ -1,6 +1,6 @@
 #pragma once
 
-namespace SDLEngine {
+namespace SDLWrapper {
 	struct Input;
 
 	class Updater {

@@ -15,7 +15,7 @@ public:
 	GameStateBase();
 	virtual ~GameStateBase();
 
-	virtual bool Update(const SDLEngine::Engine& engine) = 0;
+	virtual bool Update(const SDLWrapper::Engine& engine) = 0;
 
 protected:
 	std::vector<Drawable*> mDrawables;
@@ -28,7 +28,7 @@ public:
 	GameStateMainMenu();
 	~GameStateMainMenu();
 
-	bool Update(const SDLEngine::Engine& engine);
+	bool Update(const SDLWrapper::Engine& engine);
 private:
 	const char* startMessage;
 };
@@ -40,11 +40,11 @@ public:
 	typedef CallbackInterface<GameStateBase> TimerClass;
 
 public:
-	GameStateInGame(const SDLEngine::Engine& engine);
+	GameStateInGame(const SDLWrapper::Engine& engine);
 	~GameStateInGame();
 
 	void OnGameTimerFinished(const TimerClass* timer);
-	bool Update(const SDLEngine::Engine& engine);
+	bool Update(const SDLWrapper::Engine& engine);
 	int GetFinalScore() const;
 
 private:
@@ -58,7 +58,7 @@ public:
 	GameStatePostGame(int _score);
 	~GameStatePostGame();
 
-	bool Update(const SDLEngine::Engine& engine);
+	bool Update(const SDLWrapper::Engine& engine);
 
 private:
 	std::string mScoreText;

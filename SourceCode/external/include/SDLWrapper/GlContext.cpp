@@ -4,7 +4,7 @@
 #include <stdexcept>
 #include <string>
 
-namespace SDLEngine {
+namespace SDLWrapper {
 	GlContext::GlContext(SdlWindow& sdlWindow)
 		: mContext(SDL_GL_CreateContext(sdlWindow), SDL_GL_DeleteContext) {
 			const char* error = SDL_GetError();

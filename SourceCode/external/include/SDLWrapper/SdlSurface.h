@@ -4,7 +4,7 @@
 
 struct SDL_Surface;
 
-namespace SDLEngine {
+namespace SDLWrapper {
 	class SdlSurface {
 	public:
 		SdlSurface(const char* filename);

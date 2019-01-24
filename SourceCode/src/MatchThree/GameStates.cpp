@@ -37,7 +37,7 @@ GameStateMainMenu::~GameStateMainMenu()
 
 }
 
-bool GameStateMainMenu::Update(const SDLEngine::Engine& engine)
+bool GameStateMainMenu::Update(const SDLWrapper::Engine& engine)
 {
 	float stringWidth = engine.CalculateStringWidth(startMessage);
 	float xPos = (engine.GetWidth() / 2.f) - (stringWidth / 2.f);
@@ -51,11 +51,11 @@ bool GameStateMainMenu::Update(const SDLEngine::Engine& engine)
 //End GameStateMainMenu/////////////////////////////////////////////////
 
 //GameStateInGame//////////////////////////////////////////////////////
-GameStateInGame::GameStateInGame(const SDLEngine::Engine& engine)
+GameStateInGame::GameStateInGame(const SDLWrapper::Engine& engine)
 	: isGameRunning(true)
 {
 	//Init background
-	mDrawables.push_back(new Sprite(SDLEngine::Engine::TEXTURE_BACKGROUND));
+	mDrawables.push_back(new Sprite(SDLWrapper::Engine::TEXTURE_BACKGROUND));
 
 	//Init game grid
 	int GridSizeX = 8;
@@ -94,7 +94,7 @@ int GameStateInGame::GetFinalScore() const
 	return -1;
 }
 
-bool GameStateInGame::Update(const SDLEngine::Engine& engine)
+bool GameStateInGame::Update(const SDLWrapper::Engine& engine)
 {
 	for (Drawable* pCurrentDrawable : mDrawables)
 	{
@@ -119,7 +119,7 @@ GameStatePostGame::~GameStatePostGame()
 
 }
 
-bool GameStatePostGame::Update(const SDLEngine::Engine& engine)
+bool GameStatePostGame::Update(const SDLWrapper::Engine& engine)
 {
 	float stringWidth = engine.CalculateStringWidth(mScoreText.c_str());
 	float xPos = (engine.GetWidth() / 2.f) - (stringWidth / 2.f);

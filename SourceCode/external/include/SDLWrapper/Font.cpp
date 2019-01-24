@@ -1,6 +1,6 @@
 #include "Font.h"
 
-namespace SDLEngine {
+namespace SDLWrapper {
 	Glyph Font[191] =
 		{ { 32, 1019, 0, 0, 1, 0, 71, 16 }
 		, { 33, 819, 180, 21, 53, -1, 11, 18 }

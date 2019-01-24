@@ -1,6 +1,6 @@
 #pragma once
 
-namespace SDLEngine {
+namespace SDLWrapper {
 	class Sdl {
 	public:
 		Sdl(int flags);

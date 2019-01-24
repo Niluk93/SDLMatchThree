@@ -3,7 +3,7 @@
 #include <sdl/SDL.h>
 #include <stdexcept>
 
-namespace SDLEngine {
+namespace SDLWrapper {
 	Sdl::Sdl(int flags) {
 		if (SDL_Init(flags) != 0) {
 			throw std::runtime_error("Failed to init SDL");

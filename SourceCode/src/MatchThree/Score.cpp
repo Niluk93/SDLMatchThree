@@ -13,7 +13,7 @@ void Score::IncrementScore(int numBlocksDestroyed)
 	score += numBlocksDestroyed * pointsPerBlock;
 }
 
-void Score::Render(const SDLEngine::Engine& engine) const
+void Score::Render(const SDLWrapper::Engine& engine) const
 {
 	char scoreBuff[8];
 	std::snprintf(scoreBuff, sizeof(scoreBuff), "%04d", score);
