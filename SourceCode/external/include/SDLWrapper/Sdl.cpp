@@ -3,13 +3,17 @@
 #include <sdl/SDL.h>
 #include <stdexcept>
 
-namespace SDLWrapper {
-	Sdl::Sdl(int flags) {
-		if (SDL_Init(flags) != 0) {
+namespace SDLWrapper
+{
+	Sdl::Sdl(int flags)
+	{
+		if (SDL_Init(flags) != 0)
+		{
 			throw std::runtime_error("Failed to init SDL");
 		}
 	}
-	Sdl::~Sdl() {
+	Sdl::~Sdl()
+	{
 		SDL_Quit();
 	}
 }

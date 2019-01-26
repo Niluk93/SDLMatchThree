@@ -4,8 +4,10 @@
 
 struct SDL_Window;
 
-namespace SDLWrapper {
-	class SdlWindow {
+namespace SDLWrapper
+{
+	class SdlWindow
+	{
 	public:
 		SdlWindow(unsigned int width, unsigned int height);
 		operator SDL_Window*();

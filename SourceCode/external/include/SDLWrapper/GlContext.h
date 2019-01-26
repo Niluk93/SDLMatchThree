@@ -4,10 +4,12 @@
 
 #include <sdl/SDL.h>
 
-namespace SDLWrapper {
+namespace SDLWrapper
+{
 	class SdlWindow;
 
-	class GlContext {
+	class GlContext
+	{
 	public:
 		GlContext(SdlWindow& sdlWindow);
 		operator SDL_GLContext();

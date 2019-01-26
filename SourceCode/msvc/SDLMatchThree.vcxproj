@@ -100,6 +100,7 @@ xcopy "$(SolutionDir)assets\*.*" "$(SolutionDir)bin\assets" /Y</Command>
     <ClCompile Include="..\src\MatchThree\MatchThreeGame.cpp" />
     <ClCompile Include="..\src\MatchThree\Score.cpp" />
     <ClCompile Include="..\src\MatchThree\Sprite.cpp" />
+    <ClCompile Include="..\src\MatchThree\Text.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\external\include\SDLWrapper\Engine.h" />
@@ -118,6 +119,7 @@ xcopy "$(SolutionDir)assets\*.*" "$(SolutionDir)bin\assets" /Y</Command>
     <ClInclude Include="..\src\MatchThree\MatchThreeGame.h" />
     <ClInclude Include="..\src\MatchThree\Score.h" />
     <ClInclude Include="..\src\MatchThree\Sprite.h" />
+    <ClInclude Include="..\src\MatchThree\Text.h" />
     <ClInclude Include="..\src\MatchThree\Timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -66,6 +66,9 @@
     <ClCompile Include="..\external\include\SDLWrapper\SdlWindow.cpp">
       <Filter>Source Files\SDLWrapper</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\MatchThree\Text.cpp">
+      <Filter>Source Files\MatchThree</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\MatchThree\MatchThreeGame.h">
@@ -118,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="..\external\include\SDLWrapper\Updater.h">
       <Filter>Header Files\SDLWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MatchThree\Text.h">
+      <Filter>Header Files\MatchThree</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

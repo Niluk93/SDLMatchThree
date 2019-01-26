@@ -6,17 +6,21 @@
 #include <sdl/SDL.h>
 #include <sdl/SDL_image.h>
 
-namespace SDLWrapper {
+namespace SDLWrapper
+{
 	SdlSurface::SdlSurface(const char* filename)
 		: mSurface(IMG_Load(filename), SDL_FreeSurface)
-		, mTextureId(new unsigned int, &DeleteTexture) {
-		if (mSurface == nullptr) {
+		, mTextureId(new unsigned int, &DeleteTexture)
+	{
+		if (mSurface == nullptr)
+		{
 			throw std::runtime_error(std::string("Unable to load texture ") + filename);
 		}
 		glGenTextures(1, mTextureId.get());
 		glBindTexture(GL_TEXTURE_2D, *mTextureId);
 		int mode;
-		switch (mSurface->format->BytesPerPixel) {
+		switch (mSurface->format->BytesPerPixel)
+		{
 		case 4:
 			mode = GL_RGBA;
 			break;
@@ -35,23 +39,28 @@ namespace SDLWrapper {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	}
 
-	void SdlSurface::DeleteTexture(unsigned int* textureId) {
+	void SdlSurface::DeleteTexture(unsigned int* textureId)
+	{
 		glDeleteTextures(1, textureId);
 	}
 
-	void SdlSurface::Bind() {
+	void SdlSurface::Bind()
+	{
 		glBindTexture(GL_TEXTURE_2D, *mTextureId);
 	}
 
-	int SdlSurface::Width() const {
+	int SdlSurface::Width() const
+	{
 		return mSurface->w;
 	}
 
-	int SdlSurface::Height() const {
+	int SdlSurface::Height() const
+	{
 		return mSurface->h;
 	}
 
-	SdlSurface::operator SDL_Surface*() {
+	SdlSurface::operator SDL_Surface*()
+	{
 		return mSurface.get();
 	}
 }

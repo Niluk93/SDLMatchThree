@@ -1,7 +1,9 @@
 #pragma once
 
-namespace SDLWrapper {
-	class Sdl {
+namespace SDLWrapper
+{
+	class Sdl
+	{
 	public:
 		Sdl(int flags);
 		~Sdl();

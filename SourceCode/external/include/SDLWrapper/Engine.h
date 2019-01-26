@@ -3,11 +3,14 @@
 #include <glm/fwd.hpp>
 #include <memory>
 
-namespace SDLWrapper {
+namespace SDLWrapper
+{
 	class Updater;
-	class Engine {
+	class Engine
+	{
 	public:
-		enum Texture {
+		enum Texture
+		{
 			TEXTURE_BACKGROUND,
 			TEXTURE_GEMS_START,
 
@@ -30,18 +33,18 @@ namespace SDLWrapper {
 		float GetMouseX() const;
 		float GetMouseY() const;
 		bool GetMouseButtonDown() const;
-		
+
 		void Start(Updater& updater);
 		void Quit();
 
 		int GetTextureHeight(Texture texture) const;
 		int GetTextureWidth(Texture texture) const;
 		void Render(Texture texture, const glm::mat4& transform) const;
-		void Render(Texture texture, float x, float y, float rotation = 0.0f) const;
+		void Render(Texture texture, float x, float y, float rotation = 0.0f, float scale = 1.0f) const;
 
 
 		void Write(const char* text, const glm::mat4& transform) const;
-		void Write(const char* text, float x, float y, float rotation = 0.0f) const;
+		void Write(const char* text, float x, float y, float rotation = 0.0f, float scale = 1.0f) const;
 
 		static float CalculateStringWidth(const char* text);
 		static int GetWidth();

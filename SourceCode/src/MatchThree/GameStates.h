@@ -1,7 +1,6 @@
 #pragma once
 #include <SDLWrapper/Engine.h>
 #include <vector>
-#include <string>
 
 class Drawable;
 
@@ -12,10 +11,13 @@ class CallbackInterface;
 class GameStateBase
 {
 public:
+	typedef CallbackInterface<GameStateBase> TimerClass;
+
+public:
 	GameStateBase();
 	virtual ~GameStateBase();
 
-	virtual bool Update(const SDLWrapper::Engine& engine) = 0;
+	virtual bool Update(const SDLWrapper::Engine& engine);
 
 protected:
 	std::vector<Drawable*> mDrawables;
@@ -29,16 +31,11 @@ public:
 	~GameStateMainMenu();
 
 	bool Update(const SDLWrapper::Engine& engine);
-private:
-	const char* startMessage;
 };
 
 //game state for when the player is playing the game.
 class GameStateInGame : public GameStateBase
 {
-public:
-	typedef CallbackInterface<GameStateBase> TimerClass;
-
 public:
 	GameStateInGame(const SDLWrapper::Engine& engine);
 	~GameStateInGame();
@@ -59,7 +56,8 @@ public:
 	~GameStatePostGame();
 
 	bool Update(const SDLWrapper::Engine& engine);
+	void OnWaitTimerFinished(const TimerClass* timer);
 
 private:
-	std::string mScoreText;
+	bool waitForRestart;
 };

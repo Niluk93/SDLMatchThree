@@ -1,8 +1,8 @@
 #include "Score.h"
-#include <string>
 
 Score::Score(int _pointsPerBlock)
-	: score(0)
+	: Text("0")
+	, score(0)
 	, pointsPerBlock(_pointsPerBlock)
 {
 
@@ -11,11 +11,8 @@ Score::Score(int _pointsPerBlock)
 void Score::IncrementScore(int numBlocksDestroyed)
 {
 	score += numBlocksDestroyed * pointsPerBlock;
-}
 
-void Score::Render(const SDLWrapper::Engine& engine) const
-{
 	char scoreBuff[8];
-	std::snprintf(scoreBuff, sizeof(scoreBuff), "%04d", score);
-	engine.Write(scoreBuff, xPos, yPos, rotation);
+	std::snprintf(scoreBuff, sizeof(scoreBuff), "%d", score);
+	SetText(scoreBuff);
 }

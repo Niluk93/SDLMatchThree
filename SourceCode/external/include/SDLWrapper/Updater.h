@@ -1,9 +1,11 @@
 #pragma once
 
-namespace SDLWrapper {
+namespace SDLWrapper
+{
 	struct Input;
 
-	class Updater {
+	class Updater
+	{
 	public:
 		virtual void Update() = 0;
 	protected:

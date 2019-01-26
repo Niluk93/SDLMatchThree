@@ -1,7 +1,9 @@
 #pragma once
 
-namespace SDLWrapper {
-	struct Glyph {
+namespace SDLWrapper
+{
+	struct Glyph
+	{
 		int id;
 		int x;
 		int y;

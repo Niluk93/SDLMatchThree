@@ -18,13 +18,15 @@
 #include "Updater.h"
 
 
-namespace SDLWrapper {
+namespace SDLWrapper
+{
 	static const int WindowWidth = 640;
 	static const int WindowHeight = 960;
 	static const float MaxFrameTicks = 300.0f;
 	static const float TextScale = 0.5f;
 
-	struct Engine::EngineImplementation {
+	struct Engine::EngineImplementation
+	{
 		Sdl mSdl;
 		SdlWindow mSdlWindow;
 		GlContext mGlContext;
@@ -38,7 +40,7 @@ namespace SDLWrapper {
 		float mMouseX;
 		float mMouseY;
 		bool mMouseButtonDown;
-		
+
 		EngineImplementation()
 			: mSdl(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_NOPARACHUTE)
 			, mSdlWindow(WindowWidth, WindowHeight)
@@ -58,7 +60,8 @@ namespace SDLWrapper {
 	};
 
 	Engine::Engine(const char* assetsDirectory)
-		: mPimpl(new EngineImplementation) {
+		: mPimpl(new EngineImplementation)
+	{
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 		SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 		SDL_GL_SetSwapInterval(1);
@@ -70,7 +73,7 @@ namespace SDLWrapper {
 
 		std::string assets(assetsDirectory);
 		std::string background = assets; background += "/BackGround.png";
-		
+
 		std::string apple = assets; apple += "/Apple.png";
 		std::string bread = assets; bread += "/Bread.png";
 		std::string broccoli = assets; broccoli += "/Broccoli.png";
@@ -78,7 +81,7 @@ namespace SDLWrapper {
 		std::string milk = assets; milk += "/Milk.png";
 		std::string purple = assets; purple += "/Purple.png";
 		std::string tangerine = assets; tangerine += "/Tangerine.png";
-		
+
 		std::string font = assets; font += "/berlin_sans_demi_72_0.png";
 
 		mPimpl->mSdlSurfaceContainer[Engine::TEXTURE_BACKGROUND].reset(new SdlSurface(background.c_str()));
@@ -97,44 +100,54 @@ namespace SDLWrapper {
 		glMatrixMode(GL_MODELVIEW);
 	}
 
-	Engine::~Engine() {
+	Engine::~Engine()
+	{
 	}
 
-	float Engine::GetLastFrameSeconds() const {
+	float Engine::GetLastFrameSeconds() const
+	{
 		return mPimpl->mLastFrameSeconds;
 	}
 
-	float Engine::GetMouseX() const {
+	float Engine::GetMouseX() const
+	{
 		return mPimpl->mMouseX;
 	}
 
-	float Engine::GetMouseY() const {
+	float Engine::GetMouseY() const
+	{
 		return mPimpl->mMouseY;
 	}
 
-	bool Engine::GetMouseButtonDown() const {
+	bool Engine::GetMouseButtonDown() const
+	{
 		return mPimpl->mMouseButtonDown;
 	}
-	
-	void Engine::Quit() {
+
+	void Engine::Quit()
+	{
 		mPimpl->mQuit = true;
 	}
 
-	void Engine::Start(Updater& updater) {
+	void Engine::Start(Updater& updater)
+	{
 		mPimpl->mUpdater = &updater;
 		mPimpl->mSdlWindow.Show();
 		mPimpl->Start();
 	}
 
-	int Engine::GetTextureHeight(Texture texture) const {
+	int Engine::GetTextureHeight(Texture texture) const
+	{
 		return mPimpl->mSdlSurfaceContainer[texture]->Height();
 	}
 
-	int Engine::GetTextureWidth(Texture texture) const {
+	int Engine::GetTextureWidth(Texture texture) const
+	{
 		return mPimpl->mSdlSurfaceContainer[texture]->Width();
 	}
 
-	void Engine::Render(Engine::Texture texture, const glm::mat4& transform) const {
+	void Engine::Render(Engine::Texture texture, const glm::mat4& transform) const
+	{
 		glLoadMatrixf(reinterpret_cast<const float*>(&transform));
 
 		SdlSurface& surface = *mPimpl->mSdlSurfaceContainer[texture];
@@ -149,39 +162,51 @@ namespace SDLWrapper {
 		glEnd();
 	}
 
-	void Engine::Render(Texture texture, float x, float y, float rotation) const {
+	void Engine::Render(Texture texture, float x, float y, float rotation, float scale) const
+	{
 		glm::mat4 transformation;
 		transformation = glm::translate(transformation, glm::vec3(x, y, 0.0f));
-		if (rotation) {
+		if (rotation)
+		{
 			transformation = glm::rotate(transformation, rotation, glm::vec3(0.0f, 0.0f, 1.0f));
+		}
+		if (scale)
+		{
+			transformation = glm::scale(transformation, glm::vec3(scale, scale, scale));
 		}
 		Render(texture, transformation);
 	}
 
-	Glyph& FindGlyph(char c) {
+	Glyph& FindGlyph(char c)
+	{
 		auto found = std::lower_bound(std::begin(Font), std::end(Font), c);
-		if (found == std::end(Font) || c < *found) {
+		if (found == std::end(Font) || c < *found)
+		{
 			found = std::lower_bound(std::begin(Font), std::end(Font), static_cast<int>('_'));
 		}
 		return *found;
 	}
 
-	float Engine::CalculateStringWidth(const char* text) {
+	float Engine::CalculateStringWidth(const char* text)
+	{
 		int advance = 0;
-		for (; *text; ++text) {
+		for (; *text; ++text)
+		{
 			Glyph& g = FindGlyph(*text);
 			advance += g.advance;
 		}
-		return advance*TextScale;
+		return advance * TextScale;
 	}
 
-	void Engine::Write(const char* text, const glm::mat4& transform) const {
+	void Engine::Write(const char* text, const glm::mat4& transform) const
+	{
 		glLoadMatrixf(reinterpret_cast<const float*>(&transform));
 		int advance = 0;
-		for (; *text;++text) {
+		for (; *text; ++text)
+		{
 			Glyph& g = FindGlyph(*text);
 
-			float fontTexWidth  = static_cast<float>(mPimpl->mFontSdlSurface->Width());
+			float fontTexWidth = static_cast<float>(mPimpl->mFontSdlSurface->Width());
 			float fontTexHeight = static_cast<float>(mPimpl->mFontSdlSurface->Height());
 
 			float uvLeft = static_cast<float>(g.x) / fontTexWidth;
@@ -206,31 +231,40 @@ namespace SDLWrapper {
 		}
 	}
 
-	void Engine::Write(const char* text, float x, float y, float rotation) const {
+	void Engine::Write(const char* text, float x, float y, float rotation, float scale) const
+	{
 		glm::mat4 transformation;
 		transformation = glm::translate(transformation, glm::vec3(x, y, 0.0f));
-		if (rotation) {
+		if (rotation)
+		{
 			transformation = glm::rotate(transformation, rotation, glm::vec3(0.0f, 0.0f, 1.0f));
-			transformation = glm::translate(transformation, glm::vec3(-CalculateStringWidth(text)/2.0f, -20.0f, 0.0f));
+		}
+		if (scale)
+		{
+			transformation = glm::scale(transformation, glm::vec3(scale, scale, scale));
 		}
 		Write(text, transformation);
 	}
 
-	int Engine::GetWidth() {
+	int Engine::GetWidth()
+	{
 		return WindowWidth;
 	}
 
-	int Engine::GetHeight() {
+	int Engine::GetHeight()
+	{
 		return WindowHeight;
 	}
 
-	void Engine::EngineImplementation::Start() {
-		while (!mQuit) {
+	void Engine::EngineImplementation::Start()
+	{
+		while (!mQuit)
+		{
 			SDL_GL_SwapWindow(mSdlWindow);
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			ParseEvents();
-			
+
 			float currentTicks = static_cast<float>(SDL_GetTicks());
 			float lastFrameTicks = currentTicks - mElapsedTicks;
 			mElapsedTicks = currentTicks;
@@ -238,16 +272,20 @@ namespace SDLWrapper {
 			lastFrameTicks = std::min(lastFrameTicks, MaxFrameTicks);
 			mLastFrameSeconds = lastFrameTicks * 0.001f;
 
-			if (mUpdater) {
+			if (mUpdater)
+			{
 				mUpdater->Update();
 			}
 		}
 	}
 
-	void Engine::EngineImplementation::ParseEvents() {
+	void Engine::EngineImplementation::ParseEvents()
+	{
 		SDL_Event event;
-		while (SDL_PollEvent(&event)) {
-			switch (event.type) {
+		while (SDL_PollEvent(&event))
+		{
+			switch (event.type)
+			{
 			case SDL_QUIT:
 			case SDL_KEYDOWN:
 				mQuit = true;

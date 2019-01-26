@@ -23,13 +23,33 @@ GameStateBase::~GameStateBase()
 
 	mDrawables.clear();
 }
+
+bool GameStateBase::Update(const SDLWrapper::Engine& engine)
+{
+	for (Drawable* pCurrentDrawable : mDrawables)
+	{
+		if(pCurrentDrawable->drawFlags & Drawable::FlagUpdate)
+			pCurrentDrawable->Update(engine);
+
+		if(pCurrentDrawable->drawFlags & Drawable::FlagShow)
+			pCurrentDrawable->Render(engine);
+	}
+
+	//base game state will only update and render drawables
+	//exit conditions are derived game state's responsibility
+	return true;
+}
+
 //End GameStateBase/////////////////////////////////////////////////
 
 //GameStateMainMenu/////////////////////////////////////////////////
 GameStateMainMenu::GameStateMainMenu()
-	: startMessage("Click anywhere to start!")
 {
+	Text* startMessage = new Text("Click anywhere to start!", SDLWrapper::Engine::GetWidth() / 2.f, SDLWrapper::Engine::GetHeight() / 2.f);
+	startMessage->SetAlignment(ETextAlignment::Middle);
+	startMessage->SetDrawFlags(Drawable::FlagShow);
 
+	mDrawables.push_back(startMessage);
 }
 
 GameStateMainMenu::~GameStateMainMenu()
@@ -39,11 +59,7 @@ GameStateMainMenu::~GameStateMainMenu()
 
 bool GameStateMainMenu::Update(const SDLWrapper::Engine& engine)
 {
-	float stringWidth = engine.CalculateStringWidth(startMessage);
-	float xPos = (engine.GetWidth() / 2.f) - (stringWidth / 2.f);
-	float yPos = engine.GetHeight() / 2.f;
-
-	engine.Write(startMessage, xPos, yPos);
+	GameStateBase::Update(engine);
 
 	//Exit from main menu if the player clicks anywhere
 	return !engine.GetMouseButtonDown();
@@ -56,6 +72,7 @@ GameStateInGame::GameStateInGame(const SDLWrapper::Engine& engine)
 {
 	//Init background
 	mDrawables.push_back(new Sprite(SDLWrapper::Engine::TEXTURE_BACKGROUND));
+	mDrawables[0]->SetDrawFlags(Drawable::FlagShow);
 
 	//Init game grid
 	int GridSizeX = 8;
@@ -69,7 +86,8 @@ GameStateInGame::GameStateInGame(const SDLWrapper::Engine& engine)
 
 	//Init game timer
 	GameStateTimer* timer = new GameStateTimer(60.f, this, static_cast<GameStateTimer::Callback>(&GameStateInGame::OnGameTimerFinished));
-	timer->SetPosition((engine.GetWidth() / 2.f) - (engine.CalculateStringWidth("0:00") / 2.f), 25.f);
+	timer->SetPosition((engine.GetWidth() / 2.f), 25.f);
+	timer->SetAlignment(ETextAlignment::Middle);
 	mDrawables.push_back(timer);
 }
 
@@ -96,11 +114,7 @@ int GameStateInGame::GetFinalScore() const
 
 bool GameStateInGame::Update(const SDLWrapper::Engine& engine)
 {
-	for (Drawable* pCurrentDrawable : mDrawables)
-	{
-		pCurrentDrawable->Update(engine);
-		pCurrentDrawable->Render(engine);
-	}
+	GameStateBase::Update(engine);
 
 	//Exit game if the timer runs out
 	return isGameRunning;
@@ -109,9 +123,22 @@ bool GameStateInGame::Update(const SDLWrapper::Engine& engine)
 
 //GameStatePostGame/////////////////////////////////////////////////////
 GameStatePostGame::GameStatePostGame(int _score)
+	: waitForRestart(true)
 {
 	std::string scoreNumber = std::to_string(_score);
-	mScoreText = std::string("Final Score - ").append(scoreNumber);;
+	scoreNumber = std::string("Final Score - ").append(scoreNumber);;
+
+	Text* endScreenText = new Text(scoreNumber, SDLWrapper::Engine::GetWidth() / 2.f, SDLWrapper::Engine::GetHeight() / 2.f);
+	endScreenText->SetAlignment(ETextAlignment::Middle);
+	endScreenText->SetDrawFlags(Drawable::FlagShow);
+	mDrawables.push_back(endScreenText);
+
+	typedef Timer<GameStateBase> GameStateTimer;
+
+	//Init wait timer. To make sure we don't accidentally restart as soon as we enter post game
+	GameStateTimer* timer = new GameStateTimer(2.f, this, static_cast<GameStateTimer::Callback>(&GameStatePostGame::OnWaitTimerFinished));
+	timer->SetDrawFlags(Drawable::FlagUpdate);
+	mDrawables.push_back(timer);
 }
 
 GameStatePostGame::~GameStatePostGame()
@@ -121,13 +148,15 @@ GameStatePostGame::~GameStatePostGame()
 
 bool GameStatePostGame::Update(const SDLWrapper::Engine& engine)
 {
-	float stringWidth = engine.CalculateStringWidth(mScoreText.c_str());
-	float xPos = (engine.GetWidth() / 2.f) - (stringWidth / 2.f);
-	float yPos = engine.GetHeight() / 2.f;
+	GameStateBase::Update(engine);
 
-	engine.Write(mScoreText.c_str(), xPos, yPos);
-	
 	//Exit post game screen if player clicks anywhere
-	return !engine.GetMouseButtonDown();
+	return !engine.GetMouseButtonDown() || waitForRestart;
 }
+
+void GameStatePostGame::OnWaitTimerFinished(const TimerClass* timer)
+{
+	waitForRestart = false;
+}
+
 //End GameStatePostGame/////////////////////////////////////////////////

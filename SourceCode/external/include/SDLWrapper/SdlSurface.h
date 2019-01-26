@@ -4,8 +4,10 @@
 
 struct SDL_Surface;
 
-namespace SDLWrapper {
-	class SdlSurface {
+namespace SDLWrapper
+{
+	class SdlSurface
+	{
 	public:
 		SdlSurface(const char* filename);
 		operator SDL_Surface*();
@@ -16,6 +18,6 @@ namespace SDLWrapper {
 	private:
 		static void DeleteTexture(unsigned int* textureId);
 		std::unique_ptr<SDL_Surface, void(*)(SDL_Surface*)> mSurface;
-		std::unique_ptr<unsigned int,void(*)(unsigned int*)> mTextureId;
+		std::unique_ptr<unsigned int, void(*)(unsigned int*)> mTextureId;
 	};
 }

@@ -36,5 +36,5 @@ void Sprite::Update(const SDLWrapper::Engine& engine)
 
 void Sprite::Render(const SDLWrapper::Engine& engine) const
 {
-	engine.Render(mTexture, xPos, yPos, rotation);
+	engine.Render(mTexture, xPos, yPos, rotation, scale);
 }

@@ -41,8 +41,8 @@ Grid::Grid(int _SizeX, int _SizeY)
 		}
 	}
 
-	mScore->SetPosition(SDLWrapper::Engine::GetWidth() / 2.f - SDLWrapper::Engine::CalculateStringWidth("0000") / 2.f,
-						SDLWrapper::Engine::GetHeight() - 70.f);
+	mScore->SetPosition(SDLWrapper::Engine::GetWidth() / 2.f, SDLWrapper::Engine::GetHeight() - 70.f);
+	mScore->SetAlignment(ETextAlignment::Middle);
 }
 
 Grid::~Grid()

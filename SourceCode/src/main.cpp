@@ -3,7 +3,8 @@
 #include "MatchThree/MatchThreeGame.h"
 //**********************************************************************
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
 	MatchThreeGame game;
 	game.Start();
 
